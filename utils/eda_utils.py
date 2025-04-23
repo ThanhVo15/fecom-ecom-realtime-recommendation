@@ -35,7 +35,7 @@ def read_multiple_csv_from_folder(folder_path, file_extension = '.csv'):
         print(f"Error reading files: {e}")
         return None
 
-def quick_overview_data(df, csv_path):
+def quick_overview_data(df, csv_path, open_browser=True):
     """
     Generate a quick overview of the DataFrame and create an HTML report named after the CSV file.
 
@@ -63,7 +63,10 @@ def quick_overview_data(df, csv_path):
     profile.to_file(output_path)
 
     # Mở trên trình duyệt
-    webbrowser.open(output_path)
+    if open_browser:
+        webbrowser.open(output_path)
+    else:
+        print(f"Report saved to {output_path}")
 
     return {
         "file_name": file_name,
@@ -108,5 +111,34 @@ def check_null_overlap(df, columns):
         mask_all = pd.concat(null_masks, axis=1).all(axis=1)
         mismatch_rows = df[mask_any & ~mask_all]
         display(mismatch_rows.head())  # show only first few rows
+
+def check_duplicates(df, columns):
+    """
+    Check for duplicate rows in the DataFrame based on specified columns and remove duplicates if found.
+
+    Parameters:
+        df (pd.DataFrame): The input DataFrame.
+        columns (list): List of column names to check for duplicates.
+
+    Returns:
+        pd.DataFrame: The DataFrame with duplicates removed if any.
+    """
+    duplicate_count = df.duplicated(subset=columns).sum()
+    print(f"🔍 Duplicate Rows based on data: {duplicate_count} duplicates found.")
+    
+    if duplicate_count > 0:
+        # Get and print rows that are duplicates
+        remove_duplicates = df[df.duplicated(subset=columns, keep=False)]
+        print("Duplicates found and will be removed:")
+        print(remove_duplicates)
+        
+        # Remove duplicates
+        df = df.drop_duplicates(subset=columns, keep='first')
+        print("Duplicates removed.")
+    else:
+        print("No duplicates found. Data is clean.")
+    
+    return df
+
 
     
