@@ -1,0 +1,36 @@
+{
+  "doc": "Schema for e-commerce Fecom Inc Order Items data",
+  "type": "record",
+  "name": "Order Items",
+  "namespace": "com.fecom.ecommerce",
+  "fields": [
+    {
+      "name": "Order_ID",
+      "type": "string"
+    },
+    {
+      "name": "Order_Item_ID",
+      "type": "int"
+    },
+    {
+      "name": "Product_ID",
+      "type": "string"
+    },
+    {
+      "name": "Seller_ID",
+      "type": "string"
+    },
+    {
+      "name": "Shipping_Limit_Date",
+      "type": "string"
+    },
+    {
+      "name": "Price",
+      "type": "float"
+    },
+    {
+      "name": "Freight_Value",
+      "type": "float"
+    }
+  ]
+}

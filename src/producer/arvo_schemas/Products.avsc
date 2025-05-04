@@ -1,0 +1,52 @@
+{
+  "doc": "Schema for e-commerce Fecom Inc Products data",
+  "type": "record",
+  "name": "Products",
+  "namespace": "com.fecom.ecommerce",
+  "fields": [
+    {
+      "name": "Product_ID",
+      "type": "string"
+    },
+    {
+      "name": "Product_Category_Name",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    },
+    {
+      "name": "Product_Weight_Gr",
+      "type": [
+        "null",
+        "float"
+      ],
+      "default": null
+    },
+    {
+      "name": "Product_Length_Cm",
+      "type": [
+        "null",
+        "float"
+      ],
+      "default": null
+    },
+    {
+      "name": "Product_Height_Cm",
+      "type": [
+        "null",
+        "float"
+      ],
+      "default": null
+    },
+    {
+      "name": "Product_Width_Cm",
+      "type": [
+        "null",
+        "float"
+      ],
+      "default": null
+    }
+  ]
+}

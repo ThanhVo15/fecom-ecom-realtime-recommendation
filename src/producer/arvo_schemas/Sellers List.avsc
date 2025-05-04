@@ -1,0 +1,32 @@
+{
+  "doc": "Schema for e-commerce Fecom Inc Sellers List data",
+  "type": "record",
+  "name": "Sellers List",
+  "namespace": "com.fecom.ecommerce",
+  "fields": [
+    {
+      "name": "Seller_ID",
+      "type": "string"
+    },
+    {
+      "name": "Seller_Name",
+      "type": "string"
+    },
+    {
+      "name": "Seller_Postal_Code",
+      "type": "string"
+    },
+    {
+      "name": "Seller_City",
+      "type": "string"
+    },
+    {
+      "name": "Country_Code",
+      "type": "string"
+    },
+    {
+      "name": "Seller_Country",
+      "type": "string"
+    }
+  ]
+}

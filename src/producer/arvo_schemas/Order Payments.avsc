@@ -1,0 +1,28 @@
+{
+  "doc": "Schema for e-commerce Fecom Inc Order Payments data",
+  "type": "record",
+  "name": "Order Payments",
+  "namespace": "com.fecom.ecommerce",
+  "fields": [
+    {
+      "name": "Order_ID",
+      "type": "string"
+    },
+    {
+      "name": "Payment_Sequential",
+      "type": "int"
+    },
+    {
+      "name": "Payment_Type",
+      "type": "string"
+    },
+    {
+      "name": "Payment_Installments",
+      "type": "int"
+    },
+    {
+      "name": "Payment_Value",
+      "type": "float"
+    }
+  ]
+}

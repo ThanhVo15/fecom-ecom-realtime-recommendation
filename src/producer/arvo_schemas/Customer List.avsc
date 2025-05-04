@@ -1,0 +1,56 @@
+{
+  "doc": "Schema for e-commerce Fecom Inc Customer List data",
+  "type": "record",
+  "name": "Customer List",
+  "namespace": "com.fecom.ecommerce",
+  "fields": [
+    {
+      "name": "Customer_Trx_ID",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    },
+    {
+      "name": "Subscriber_ID",
+      "type": "string"
+    },
+    {
+      "name": "Subscribe_Date",
+      "type": "string"
+    },
+    {
+      "name": "First_Order_Date",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    },
+    {
+      "name": "Customer_Postal_Code",
+      "type": "string"
+    },
+    {
+      "name": "Customer_City",
+      "type": "string"
+    },
+    {
+      "name": "Customer_Country",
+      "type": "string"
+    },
+    {
+      "name": "Customer_Country_Code",
+      "type": "string"
+    },
+    {
+      "name": "Age",
+      "type": "int"
+    },
+    {
+      "name": "Gender",
+      "type": "string"
+    }
+  ]
+}

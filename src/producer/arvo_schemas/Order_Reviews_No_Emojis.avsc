@@ -1,0 +1,44 @@
+{
+  "doc": "Schema for e-commerce Fecom_Inc_Order_Reviews_No_Emojis data",
+  "type": "record",
+  "name": "Order_Reviews_No_Emojis",
+  "namespace": "com.fecom.ecommerce",
+  "fields": [
+    {
+      "name": "Review_ID",
+      "type": "string"
+    },
+    {
+      "name": "Order_ID",
+      "type": "string"
+    },
+    {
+      "name": "Review_Score",
+      "type": "int"
+    },
+    {
+      "name": "Review_Comment_Title_En",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    },
+    {
+      "name": "Review_Comment_Message_En",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    },
+    {
+      "name": "Review_Creation_Date",
+      "type": "string"
+    },
+    {
+      "name": "Review_Answer_Timestamp",
+      "type": "string"
+    }
+  ]
+}

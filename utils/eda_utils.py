@@ -1,7 +1,11 @@
 # -*- coding: utf-8 -*-
 
-import pandas as pd
+import os
+import json
 import numpy as np
+import pandas as pd
+from datetime import datetime
+import fastavro
 
 def read_multiple_csv_from_folder(folder_path, file_extension = '.csv'):
     """
@@ -111,6 +115,7 @@ def check_null_overlap(df, columns):
         mask_all = pd.concat(null_masks, axis=1).all(axis=1)
         mismatch_rows = df[mask_any & ~mask_all]
         display(mismatch_rows.head())  # show only first few rows
+    
 
 def check_duplicates(df, columns):
     """
@@ -140,5 +145,70 @@ def check_duplicates(df, columns):
     
     return df
 
+def convert_csv_to_avro(df: pd.DataFrame, csv_path: str, output_dir: str = None) -> str:
+    """
+    Generate an Avro schema from a DataFrame, print it to console, and save it as a .avsc file.
 
-    
+    Parameters:
+        df (pd.DataFrame): Source DataFrame.
+        csv_path (str): Path to the source CSV file (used for naming).
+        output_dir (str, optional): Directory in which to save the .avsc file.
+                                    If None, defaults to the CSV’s folder.
+
+    Returns:
+        str: Path to the written .avsc file.
+    """
+    # 1. Determine base name and output path
+    base_name = os.path.splitext(os.path.basename(csv_path))[0]
+    schema_name = base_name[len("Fecom Inc "):]
+    if output_dir is None:
+        output_dir = os.path.dirname(csv_path) or os.getcwd()
+    os.makedirs(output_dir, exist_ok=True)
+    schema_path = os.path.join(output_dir, f"{schema_name}.avsc")
+
+    # 2. Build schema fields
+    fields = []
+    for col in df.columns:
+        dtype = df[col].dtype
+        has_null = df[col].isnull().any()
+
+        # Map pandas dtype to Avro type
+        if dtype == 'bool' or dtype == np.bool_:
+            avro_type = "boolean"
+        elif dtype in ('int64', np.int64, 'Int64'):
+            avro_type = "int"
+        elif dtype in ('float64', np.float64):
+            avro_type = "float"
+        elif dtype.kind == 'M':  # M nghĩa là datetime64
+            avro_type = {"type": "long", "logicalType": "timestamp-millis"}
+        else:
+            avro_type = "string"
+
+        # Wrap in a null union if needed
+        if has_null:
+            field_schema = {"name": col, "type": ["null", avro_type], "default": None}
+        else:
+            field_schema = {"name": col, "type": avro_type}
+
+        fields.append(field_schema)
+
+    schema = {
+        "doc": f"Schema for e-commerce {base_name} data",
+        "type": "record",
+        "name": schema_name,
+        "namespace": "com.fecom.ecommerce",
+        "fields": fields
+    }
+
+    # 3. Print schema for comparison
+    schema_json = json.dumps(schema, indent=2)
+    print("=== Generated Avro Schema ===")
+    print(schema_json)
+    print("=============================")
+
+    # 4. Save schema to .avsc
+    with open(schema_path, 'w') as f:
+        f.write(schema_json)
+
+    print(f"Schema saved to: {schema_path}")
+    return schema_path

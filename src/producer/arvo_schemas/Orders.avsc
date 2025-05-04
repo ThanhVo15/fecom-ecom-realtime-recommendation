@@ -1,0 +1,52 @@
+{
+  "doc": "Schema for e-commerce Fecom Inc Orders data",
+  "type": "record",
+  "name": "Orders",
+  "namespace": "com.fecom.ecommerce",
+  "fields": [
+    {
+      "name": "Order_ID",
+      "type": "string"
+    },
+    {
+      "name": "Customer_Trx_ID",
+      "type": "string"
+    },
+    {
+      "name": "Order_Status",
+      "type": "string"
+    },
+    {
+      "name": "Order_Purchase_Timestamp",
+      "type": "string"
+    },
+    {
+      "name": "Order_Approved_At",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    },
+    {
+      "name": "Order_Delivered_Carrier_Date",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    },
+    {
+      "name": "Order_Delivered_Customer_Date",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    },
+    {
+      "name": "Order_Estimated_Delivery_Date",
+      "type": "string"
+    }
+  ]
+}

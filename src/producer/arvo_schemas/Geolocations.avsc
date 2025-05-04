@@ -1,0 +1,48 @@
+{
+  "doc": "Schema for e-commerce Fecom Inc Geolocations data",
+  "type": "record",
+  "name": "Geolocations",
+  "namespace": "com.fecom.ecommerce",
+  "fields": [
+    {
+      "name": "Geo_Postal_Code",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    },
+    {
+      "name": "Geo_Lat",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    },
+    {
+      "name": "Geo_Lon",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    },
+    {
+      "name": "Geolocation_City",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    },
+    {
+      "name": "Geo_Country",
+      "type": [
+        "null",
+        "string"
+      ],
+      "default": null
+    }
+  ]
+}
